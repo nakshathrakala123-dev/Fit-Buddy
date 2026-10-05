@@ -1,0 +1,11 @@
+.page.wide { max-width: 1240px; }
+.table-wrap { margin-top: 1.5rem; overflow-x: auto; background: var(--card); border: 1px solid var(--line); border-radius: 6px; }
+table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+th { text-align: left; background: var(--ink); color: #fff; font-weight: 600; padding: .6rem .8rem; }
+td { padding: .6rem .8rem; vertical-align: top; }
+tbody { border-bottom: 2px solid var(--line); }
+.plans td { padding-top: 0; }
+.plans summary { cursor: pointer; font-weight: 600; margin: .4rem 0; }
+.muted { color: var(--muted); margin: .4rem 0; }
+.link-danger { background: none; color: var(--cardio); padding: 0; text-decoration: underline; }
+.link-danger:hover { background: none; }

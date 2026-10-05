@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}FitBuddy{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/base.css">
+  {% block css %}{% endblock %}
+</head>
+<body>
+  <header class="bar">
+    <a class="brand" href="/">FitBuddy</a>
+    <a href="/view-all-users">All users</a>
+  </header>
+  {% block content %}{% endblock %}
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

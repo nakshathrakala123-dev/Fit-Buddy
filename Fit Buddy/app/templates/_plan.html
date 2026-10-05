@@ -1,0 +1,30 @@
+{% macro week(plan, raw, legend=true) %}
+{% if plan %}
+  {% if plan.summary %}<p class="plan-summary">{{ plan.summary }}</p>{% endif %}
+  {% if legend %}
+  <p class="legend">
+    <span class="t-strength">Strength</span><span class="t-cardio">Cardio</span>
+    <span class="t-mobility">Mobility</span><span class="t-rest">Rest</span>
+  </p>
+  {% endif %}
+  <div class="week">
+    {% for d in plan.days %}
+    <article class="day t-{{ d.type if d.type in ['strength', 'cardio', 'mobility', 'rest'] else 'strength' }}">
+      <h3><span class="day-no">Day {{ d.day }}</span>{{ d.focus }}</h3>
+      {% if d.warmup %}<p><b>Warm-up</b> {{ d.warmup }}</p>{% endif %}
+      {% if d.exercises %}
+      <ul class="moves">
+        {% for e in d.exercises %}<li><span>{{ e.name }}</span><span>{{ e.detail }}</span></li>{% endfor %}
+      </ul>
+      {% endif %}
+      {% if d.cooldown %}<p><b>Cooldown</b> {{ d.cooldown }}</p>{% endif %}
+    </article>
+    {% endfor %}
+  </div>
+  {% if plan.notes %}
+  <ul class="notes">{% for n in plan.notes %}<li>{{ n }}</li>{% endfor %}</ul>
+  {% endif %}
+{% else %}
+  <pre class="raw">{{ raw }}</pre>
+{% endif %}
+{% endmacro %}

@@ -1,0 +1,27 @@
+.page { max-width: 1080px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+.who { color: var(--muted); margin: .8rem 0 1.6rem; }
+.plan-summary { max-width: 62ch; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 1.2rem; margin: 1rem 0; font-size: .92rem; }
+.legend span::before { content: ""; display: inline-block; width: .8rem; height: .8rem; margin-right: .4rem; border-radius: 2px; background: var(--c); }
+
+.t-strength { --c: var(--strength); } .t-cardio { --c: var(--cardio); }
+.t-mobility { --c: var(--mobility); } .t-rest { --c: var(--rest); }
+
+.week { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+.day { background: var(--card); border: 1px solid var(--line); border-left: 7px solid var(--c); border-radius: 6px; padding: .9rem 1.1rem 1rem; }
+.day h3 { font-size: 1.45rem; margin-bottom: .5rem; }
+.day-no { display: block; font-size: .95rem; font-weight: 600; color: var(--c); }
+.day p { margin: .5rem 0; font-size: .95rem; }
+.moves { list-style: none; margin: .6rem 0; padding: 0; }
+.moves li { display: flex; justify-content: space-between; gap: 1rem; padding: .3rem 0; border-bottom: 1px dotted var(--line); font-size: .95rem; }
+.moves li span:last-child { text-align: right; color: var(--muted); }
+.notes { margin-top: 1.2rem; color: var(--muted); font-size: .95rem; }
+.raw { white-space: pre-wrap; background: var(--card); padding: 1rem; border-radius: 6px; }
+
+.tip { margin-top: 2rem; padding: 1rem 1.3rem; background: var(--card); border-left: 7px solid var(--mobility); max-width: 70ch; }
+.tip p { margin: .4rem 0 0; }
+.feedback { margin-top: 2.5rem; max-width: 560px; }
+.feedback button { margin-top: .9rem; }
+.old { margin-top: 2rem; }
+.old summary { cursor: pointer; font-weight: 600; margin-bottom: 1rem; }

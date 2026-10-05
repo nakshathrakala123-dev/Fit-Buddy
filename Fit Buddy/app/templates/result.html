@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% from "_plan.html" import week %}
+{% block title %}{{ user.name }}'s plan - FitBuddy{% endblock %}
+{% block css %}<link rel="stylesheet" href="/static/css/plan.css">{% endblock %}
+{% block content %}
+<main class="page">
+  <h1>{{ plan.title if plan and plan.title else 'Your 7-day plan' }}</h1>
+  <p class="who">{{ user.name }} (ID {{ user.id }}), {{ user.age }} years, {{ user.weight }} kg. Goal: {{ user.goal }}. Intensity: {{ user.intensity }}.</p>
+
+  {% if message %}<p class="banner ok" role="status">{{ message }}</p>{% endif %}
+  {% if error %}<p class="banner error" role="alert">{{ error }}</p>{% endif %}
+
+  {{ week(plan, raw) }}
+
+  {% if tip %}
+  <section class="tip">
+    <h2>Nutrition tip</h2>
+    <p>{{ tip }}</p>
+  </section>
+  {% endif %}
+
+  <form class="feedback" method="post" action="/submit-feedback" data-busy="Updating your plan...">
+    <h2>Change something</h2>
+    <input type="hidden" name="user_id" value="{{ user.id }}">
+    <label for="feedback">What should be different?</label>
+    <textarea id="feedback" name="feedback" rows="3" maxlength="500" placeholder="More cardio, an extra rest day, no jumping exercises..." required></textarea>
+    <button type="submit">Update plan</button>
+  </form>
+
+  {% if has_update %}
+  <details class="old">
+    <summary>See the original plan</summary>
+    {{ week(original, original_raw, false) }}
+  </details>
+  {% endif %}
+</main>
+{% endblock %}

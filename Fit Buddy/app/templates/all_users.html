@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% from "_plan.html" import week %}
+{% block title %}All users - FitBuddy{% endblock %}
+{% block css %}<link rel="stylesheet" href="/static/css/plan.css"><link rel="stylesheet" href="/static/css/admin.css">{% endblock %}
+{% block content %}
+<main class="page wide">
+  <h1>All users</h1>
+  {% if not rows %}
+    <p>No one has signed up yet. <a href="/">Create the first plan.</a></p>
+  {% else %}
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>ID</th><th>Name</th><th>Age</th><th>Weight (kg)</th><th>Goal</th><th>Intensity</th><th></th></tr></thead>
+      {% for r in rows %}
+      <tbody>
+        <tr>
+          <td>{{ r.user.id }}</td>
+          <td><a href="/plan/{{ r.user.id }}">{{ r.user.name }}</a></td>
+          <td>{{ r.user.age }}</td>
+          <td>{{ r.user.weight }}</td>
+          <td>{{ r.user.goal }}</td>
+          <td>{{ r.user.intensity }}</td>
+          <td>
+            <form method="post" action="/delete-user/{{ r.user.id }}" data-confirm="Delete {{ r.user.name }} and their plans?">
+              <button class="link-danger" type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+        <tr class="plans">
+          <td colspan="7">
+            <details><summary>Original plan</summary>{{ week(r.original, r.original_raw, false) }}</details>
+            {% if r.has_update %}
+            <details><summary>Updated plan</summary>{{ week(r.updated, r.updated_raw, false) }}</details>
+            {% else %}
+            <p class="muted">No feedback yet.</p>
+            {% endif %}
+          </td>
+        </tr>
+      </tbody>
+      {% endfor %}
+    </table>
+  </div>
+  {% endif %}
+</main>
+{% endblock %}

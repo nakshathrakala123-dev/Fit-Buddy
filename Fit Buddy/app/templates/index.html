@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block css %}<link rel="stylesheet" href="/static/css/form.css">{% endblock %}
+{% block content %}
+<main class="stage">
+<form class="card" method="post" action="/generate-workout" data-busy="Building your plan, about 20 seconds...">
+    <h1>FitBuddy</h1>
+    <p class="lede">Tell us your goal and how hard you want to train. You get a 7-day plan and a nutrition tip.</p>
+    {% if error %}<p class="banner error" role="alert">{{ error }}</p>{% endif %}
+
+    <label for="username">Name</label>
+    <input id="username" name="username" value="{{ form.username }}" maxlength="60" required>
+
+    <label for="user_id">User ID</label>
+    <input id="user_id" name="user_id" type="number" min="1" value="{{ form.user_id }}" required>
+    <small>Pick any number. You use it later to find or change your plan.</small>
+
+    <div class="pair">
+      <div>
+        <label for="age">Age</label>
+        <input id="age" name="age" type="number" min="14" max="100" value="{{ form.age }}" required>
+      </div>
+      <div>
+        <label for="weight">Weight (kg)</label>
+        <input id="weight" name="weight" type="number" min="20" max="400" step="0.1" value="{{ form.weight }}" required>
+      </div>
+    </div>
+
+    <label for="goal">Fitness goal</label>
+    <input id="goal" name="goal" list="goals" placeholder="e.g. lose belly fat, run a 5K" value="{{ form.goal }}" maxlength="200" required>
+    <datalist id="goals"><option value="weight loss"><option value="muscle gain"><option value="general wellness"></datalist>
+
+    <label for="intensity">Workout intensity</label>
+    <select id="intensity" name="intensity">
+      {% for v in ['low', 'medium', 'high'] %}
+      <option value="{{ v }}" {{ 'selected' if (form.intensity or 'medium') == v }}>{{ v|capitalize }}</option>
+      {% endfor %}
+    </select>
+
+    <button type="submit">Create my plan</button>
+  </form>
+</main>
+{% endblock %}
